@@ -5,15 +5,25 @@ public class Grid {
 
     public Grid(Cell[] cells, int gridRows, int gridCols){
         gridArray = new Cell[gridRows][gridCols];
-        // init all cells
-        for (int i = 0; i < gridRows; i++){
+        for (int i = 0; i < gridRows; i++){ // init all cells
             for (int j = 0; j < gridCols; j++){
-                gridArray[i][j] = new Cell(i,j); // init dead cell with index i,j
+                gridArray[i][j] = new Cell(i,j);
             }
         }
         for (Cell c : cells){ //set all cells in array to be alive
-            gridArray[c.getIndexRow()][c.getIndexCol()].setAlive(true);
+            if (isInBounds(c.getIndexRow(),c.getIndexCol(),gridArray)) {
+                gridArray[c.getIndexRow()][c.getIndexCol()].setAlive(true);
+            }
         }
+        for (Cell[] arr : gridArray){ //compute all cells statuses
+            for (Cell c : arr){
+                c.countLivingNeighbors(gridArray);
+            }
+        }
+        //tests
+        //gridArray[1][2].countLivingNeighbors(gridArray);
+        System.out.println(gridArray[2][2].getNumLivingNeighbors());
+        System.out.println(gridArray[2][2].isAliveNextGen());
     }
 
     public void computeNextGen(){}
@@ -29,9 +39,17 @@ public class Grid {
         }
     }
 
+    //private methods
+
     private String cellToString(Cell c){
         return c.isAlive() ? "1" : "0";
     }
+
+    private boolean isInBounds(int row, int col, Cell[][] gridArray) {
+        return row >= 0 && row < gridArray.length && col >= 0 && col < gridArray[col].length;
+    }
+
+    //getter & setter
 
     public Cell[][] getGridArray() {
         return gridArray;

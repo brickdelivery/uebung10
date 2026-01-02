@@ -18,12 +18,12 @@ public class Cell {
         this.indexCol = indexCol;
     }
 
-    //TODO test method
     public void countLivingNeighbors(Cell[][] gridArray) {
         int living = 0;
         for (int i = this.indexRow - 1; i <= this.indexRow + 1; i++) {
             if (i >= 0 && i < gridArray.length) {
-                for (int j = this.indexCol - 1; j <= this.indexCol + 1; j++) {
+                for (int j = this.indexCol - 1; j <= this.indexCol + 1; j++) { // if(i >= 0 && i < gridArray.length)
+                    // (j >= 0 && j < gridArray[i].length)
                     if (j >= 0 && j < gridArray[i].length) {
                         if (gridArray[i][j].isAlive() && gridArray[i][j] != this) {
                             living++;
@@ -36,6 +36,8 @@ public class Cell {
         decideNextStatus();
     }
 
+    //private methods
+
     private void decideNextStatus() {
         isAliveNextGen = false;
         if (numLivingNeighbors == 3) {
@@ -45,7 +47,7 @@ public class Cell {
         }
     }
 
-//getter and setter
+    //getter and setter
 
     public int getIndexRow() {
         return indexRow;
