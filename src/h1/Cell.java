@@ -40,7 +40,7 @@ public class Cell {
 
     private void decideNextStatus() {
         isAliveNextGen = false;
-        if (numLivingNeighbors == 3) {
+        if (numLivingNeighbors >= 3) {
             isAliveNextGen = true;
         } else if (numLivingNeighbors == 2 && this.isAlive()) {
             isAliveNextGen = true;
