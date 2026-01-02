@@ -10,25 +10,46 @@ public class Grid {
                 gridArray[i][j] = new Cell(i,j);
             }
         }
-        for (Cell c : cells){ //set all cells in array to be alive
+        for (Cell c : cells){ //set all cells in array to alive
             if (isInBounds(c.getIndexRow(),c.getIndexCol(),gridArray)) {
                 gridArray[c.getIndexRow()][c.getIndexCol()].setAlive(true);
             }
         }
+        updateAllCells();
+    }
+
+    private void updateAllCells() {
         for (Cell[] arr : gridArray){ //compute all cells statuses
             for (Cell c : arr){
                 c.countLivingNeighbors(gridArray);
             }
         }
-        //tests
-        //gridArray[1][2].countLivingNeighbors(gridArray);
-        System.out.println(gridArray[2][2].getNumLivingNeighbors());
-        System.out.println(gridArray[2][2].isAliveNextGen());
     }
 
-    public void computeNextGen(){}
+    public void computeNextGen(){
+        Cell[][] nextGen = new Cell[gridArray.length][gridArray[0].length];
+        for (int i = 0; i < gridArray.length; i++) {
+            for (int j = 0; j < gridArray[i].length; j++) {
+                nextGen[i][j] = new Cell(i,j);
+                if(gridArray[i][j].isAliveNextGen()){
+                    nextGen[i][j].setAlive(true);
+                }
+            }
+        }
+        for (int i = 0; i < nextGen.length; i++) {
+            for (int j = 0; j < nextGen[i].length; j++) {
+                gridArray[i][j].setAlive(nextGen[i][j].isAlive());
+            }
+        }
+        updateAllCells();
+    }
 
-    public void computeGeneration(int n){}
+    public void computeGeneration(int n){
+        while (n !=0 ){
+            computeNextGen();
+            n--;
+        }
+    }
 
     public void outputGrid(){
         for (int i = 0; i < gridArray.length; i++){
@@ -37,6 +58,7 @@ public class Grid {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     //private methods
@@ -46,7 +68,7 @@ public class Grid {
     }
 
     private boolean isInBounds(int row, int col, Cell[][] gridArray) {
-        return row >= 0 && row < gridArray.length && col >= 0 && col < gridArray[col].length;
+        return row >= 0 && row < gridArray.length && col >= 0 && col < gridArray[0].length;
     }
 
     //getter & setter
