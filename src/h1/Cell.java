@@ -32,6 +32,7 @@ public class Cell {
                 }
             }
         }
+        //System.out.println("neighbors: " + living + " " + this.getIndexRow() + this.getIndexCol());
         this.numLivingNeighbors = living;
         decideNextStatus();
     }
@@ -39,11 +40,10 @@ public class Cell {
     //private methods
 
     private void decideNextStatus() {
-        isAliveNextGen = false;
-        if (numLivingNeighbors >= 3) {
-            isAliveNextGen = true;
-        } else if (numLivingNeighbors == 2 && this.isAlive()) {
-            isAliveNextGen = true;
+        if (alive) {
+            isAliveNextGen = !(numLivingNeighbors > 3) && !(numLivingNeighbors < 2);
+        } else {
+            isAliveNextGen = numLivingNeighbors == 3;
         }
     }
 
