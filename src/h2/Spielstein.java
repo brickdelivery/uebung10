@@ -12,7 +12,19 @@ public class Spielstein {
     }
 
     public void go(int n) {
-
+        for (int i = 0; i < n; i++) {
+            if (movesOut() || brett.getBrett()[currentRow][currentCol].isBoese())
+                continue;
+            char currentDir = brett.getBrett()[currentRow][currentCol].getDirection();
+            if (currentDir == 'U')
+                currentRow--;
+            else if (currentDir == 'D')
+                currentRow++;
+            else if (currentDir == 'L')
+                currentCol--;
+            else if (currentDir == 'R')
+                currentCol++;
+        }
     }
 
     private boolean movesOut() {
