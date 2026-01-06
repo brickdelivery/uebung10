@@ -2,10 +2,26 @@ package h2;
 
 public class Spielbrett {
     private Feld[][] brett;
-    int dim;
+    private int dim;
 
     public Spielbrett(int dim){
         this.dim = dim;
         brett = new Feld[dim][dim];
+    }
+
+    public int getDim() {
+        return dim;
+    }
+
+    public void setDim(int dim) {
+        this.dim = dim;
+    }
+
+    public Feld[][] getBrett() {
+        return brett;
+    }
+
+    public void setBrett(Feld[][] brett) {
+        this.brett = brett;
     }
 }
