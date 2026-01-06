@@ -22,8 +22,7 @@ public class Cell {
         int living = 0;
         for (int i = this.indexRow - 1; i <= this.indexRow + 1; i++) {
             if (i >= 0 && i < gridArray.length) {
-                for (int j = this.indexCol - 1; j <= this.indexCol + 1; j++) { // if(i >= 0 && i < gridArray.length)
-                    // (j >= 0 && j < gridArray[i].length)
+                for (int j = this.indexCol - 1; j <= this.indexCol + 1; j++) {
                     if (j >= 0 && j < gridArray[i].length) {
                         if (gridArray[i][j].isAlive() && gridArray[i][j] != this) {
                             living++;
@@ -32,7 +31,6 @@ public class Cell {
                 }
             }
         }
-        //System.out.println("neighbors: " + living + " " + this.getIndexRow() + this.getIndexCol());
         this.numLivingNeighbors = living;
         decideNextStatus();
     }
