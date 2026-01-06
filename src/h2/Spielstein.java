@@ -5,18 +5,27 @@ public class Spielstein {
     private int currentCol;
     private Spielbrett brett;
 
-    public Spielstein(Spielbrett brett, int indexRow, int indexCol){
+    public Spielstein(Spielbrett brett, int indexRow, int indexCol) {
         this.brett = brett;
         this.currentRow = indexRow;
         this.currentCol = indexCol;
     }
 
-    public void go(int n){
+    public void go(int n) {
 
     }
 
-    private boolean movesOut(){
-
+    private boolean movesOut() {
+        char currentDir = brett.getBrett()[currentRow][currentCol].getDirection();
+        if (currentRow == 0 && currentDir == 'U')
+            return true;
+        if (currentRow == brett.getDim() - 1 && currentDir == 'D')
+            return true;
+        if (currentCol == 0 && currentDir == 'L')
+            return true;
+        if (currentCol == brett.getDim() - 1 && currentDir == 'R')
+            return true;
+        return false;
     }
 
     public int getCurrentRow() {
