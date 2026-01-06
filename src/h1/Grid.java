@@ -51,16 +51,6 @@ public class Grid {
         }
     }
 
-    public void outputGrid(){
-        for (int i = 0; i < gridArray.length; i++){
-            for (int j = 0; j < gridArray[i].length; j++){
-                System.out.print(" " + cellToString(gridArray[i][j]) + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
     //private methods
 
     private String cellToString(Cell c){
